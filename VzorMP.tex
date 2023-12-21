@@ -1,0 +1,88 @@
+\documentclass[12pt]{report}			% Začátek dokumentu
+\usepackage{MP}							% Import stylu
+
+\author{Alexandr Bihun}
+\title{Vizualizace významných algoritmů}
+\date{14. února 2024}
+\vedouci{Dr. rer. nat. Michal Kočer}
+\place{V Českých Budějovicích}
+\skolnirok{2023/2024}
+\logo{\includegraphics[scale=1.25]{GJ8_logotyp}}
+
+\begin{document}
+	\mytitlepage						% Vygenerování titulní strany
+	
+	\prohlaseni{
+		Prohlašuji, že jsem tuto práci vypracoval samostatně s vyznačením všech použitých pramenů.
+	}	
+	
+	\abstrakt{
+		Tato maturitní práce se zaměřuje na vystětlení chodu známých algoritmů v oblasti pathfindingu (vyhledávání cest), rovněž jako na jejich analýzu a příblížení jejich využití v opravdovém světě. Dále bude naznačeno, jak jsem implementoval za pomoci knihovny Pygame v jazyce Python uživatelsky přívětivou aplikaci pro vizualici těchto algoritmů, která umožňuje uživatelům hlubší porozumnění a poskytuje skutečný vhled na fuknci těchto algoritmů. % Abstrakt
+	}{
+		algoritmus, analýza algoritmů, hledání cest, grafy,  vizualizace, python, pygame					% Klíčová slova
+	}
+	
+	\podekovani{
+		Tady bude poděkování.						% Poděkování
+	}
+	
+   {\tableofcontents\newpage}			% Obsah
+	
+%\addtocounter{page}{1}		% Posunutí countru stránek	
+\pagenumbering{arabic}		% Číslování stránke arabskými číslicemi
+	\chapter*{Úvod}
+		Přesto, že si to většina lidí nejspíše neuvědumuje, využívají algoritmy na denním pořádku. blabla...	
+		V této práci se zaměřím výhradně na algoritmy pro hledání cest	
+	
+	
+	\part{Představení vybraných algoritmů}
+	
+		\chapter{O algoritmech obecně}
+			
+			\section{Trocha historie}
+			
+			\section{Reálné využítí}
+				
+
+		\chapter{Vsuvka z teorie grafů}
+		
+		\chapter{Analýza algoritmů}
+			\section{Časová složitost}
+			
+			\section{Prostorová složitost}			
+				
+		\chapter{Algoritmy}
+			\section{Prohledávání do hloubky}
+			
+			\section{Prohledávání do šířky}
+			
+			\section{Dijkstrův algoritmus}
+			
+			\section{Uspořádáné vyhledávání}
+			
+			\section{Algoritmus A*}
+			
+	
+	\part{Implementace vizualizačního programu}
+
+		\section{Výpisy použitých programů}
+
+
+
+
+	\chapter*{Závěr}
+	
+		Tady bude závěr.
+	
+	\nocite{*}
+    \printbibliography					% Vytvoří seznam literatury
+	\addcontentsline{toc}{chapter}{Bibliografie}
+    \printglossary[title={Zkratky}]		% Vytvoří seznam zkratek
+    \listoffigures						% Vytvoří seznam obrázků
+    \listoftables						% Vytvoří seznam tabulek
+
+    \begin{appendices}
+	\chapter{Příloha s kódem}	
+
+	\end{appendices}
+\end{document}

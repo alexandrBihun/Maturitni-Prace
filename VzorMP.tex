@@ -1,5 +1,13 @@
 \documentclass[12pt]{report}			% Začátek dokumentu
 \usepackage{MP}							% Import stylu
+\usepackage[ruled,vlined,czech]{algorithm2e}
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
+\SetKwFor{While}{Dokud}{dělej}{konec dokud} %Přejmenuje While na dokud
+\SetKwRepeat{Repeat}{Opakuj}{dokud}
+\SetKwIF{If}{ElseIf}{Else}{Pokud}{pak}{jinak pokud}{jinak}{konec pokud}%
+\SetKwComment{Komentar}{$\lhd$ }{}
+\DontPrintSemicolon
 
 \author{Alexandr Bihun}
 \title{Vizualizace významných algoritmů}
@@ -17,9 +25,9 @@
 	}	
 	
 	\abstrakt{
-		Tato maturitní práce se zaměřuje na vystětlení chodu známých algoritmů v oblasti pathfindingu (vyhledávání cest), rovněž jako na jejich analýzu a příblížení jejich využití v opravdovém světě. Dále bude naznačeno, jak jsem implementoval za pomoci knihovny Pygame v jazyce Python uživatelsky přívětivou aplikaci pro vizualici těchto algoritmů, která umožňuje uživatelům hlubší porozumnění a poskytuje skutečný vhled na fuknci těchto algoritmů. % Abstrakt
+		Tato maturitní práce se zaměřuje na vystětlení chodu známých algoritmů v oblasti pathfindingu (vyhledávání cest), rovněž jako na jejich analýzu a příblížení jejich využití v opravdovém světě. Dále bude naznačeno, jak jsem implementoval za pomoci knihovny Pygame v jazyce Python uživatelsky přívětivou aplikaci pro vizualici těchto algoritmů, která umožňuje uživatelům hlubší porozumnění a poskytuje skutečný vhled na fuknci těchto algoritmů.  blablabla% Abstrakt
 	}{
-		algoritmus, analýza algoritmů, hledání cest, grafy,  vizualizace, python, pygame					% Klíčová slova
+		algoritmy, analýza algoritmů, vyhledávání cest, grafy,  vizualizace, python, pygame					% Klíčová slova
 	}
 	
 	\podekovani{
@@ -32,26 +40,121 @@
 \pagenumbering{arabic}		% Číslování stránke arabskými číslicemi
 	\chapter*{Úvod}
 		Přesto, že si to většina lidí nejspíše neuvědumuje, využívají algoritmy na denním pořádku. blabla...	
-		V této práci se zaměřím výhradně na algoritmy pro hledání cest	
+		V této práci se zaměřím na algoritmy pro hledání cest	 blabla Cílem je vytvo
 	
 	
-	\part{Představení vybraných algoritmů}
+	\part{Představení a analýza vybraných algoritmů}
 	
-		\chapter{O algoritmech obecně}
+		\chapter{Algoritmus}
+		Samotné slovo algoritmus vzniklo zkomolením jména významného perského matematika, kterým byl Abu Jafar Muhammada ibn Mūsā al-Chwārizmi (asi 780-850 n. l.). Ten ve svých dílech položil základy algebry a způsobů řešení lineárních a kvadratických rovnic. Přeložením jeho spisu o indickém početním systému, ve kterém ukazuje, jak provádět základní početní operace, nabylo jeho jméno nového významu. Do latiny byl totiž přeložen jako \emph{Algoritmi de Numero Indorum} (česky "Algoritmi o číslech od Indů"), kde slovo Algortimi je latinizovaná forma jeho jména. Tato forma jeho jména se pak začala používat jako označení různých matematických postupů. \cite{cerny} \cite{neckar} \cite{mehri}
 			
-			\section{Trocha historie}
+			\section{Definice algoritmu}
+			Obecně se dá říci, že algoritmus je nějaká přesně daná posloupnost kroků, kterou lze dosáhnout kýženého výsledku. Tím pádem definici algoritmu splňují například recepty z kuchařek, návody na kosntrukci nábytku, pracovní postupy a podobně. \cite{neckar}
 			
-			\section{Reálné využítí}
+			
+			Nejčastěji se ale s algoritmy setkáváme v kontextu matematické informatiky, kde popisují početní proceduru, kterou lze řešit konkrétní úlohy. Tyto algoritmy pak musí být schopné přijmout jakýkoli vstup popisující zadaný problém a vyřešit ho, tj. vyprodukovat korektní výstup. Zároveň musí být tak pečlivě a přesně zapsány, aby jim porozumněl počítač. K tomuto účelu slouží \emph{programovací jazyky}, které se skládají ze slov s jasně danými význami. Spustitelný algortimus přepsaný ve vhodném programovacím jazyce nazýváme \emph{program}. \cite{dvorsky} 
+			
+			\subsection{Vlastnosti algoritmu}
+			Podle \cite{zaklady} a \cite{cerny} od algoritmu požadujeme (většinou)\footnote{Existují algoritmy, které např. generují pouze přibližné řešení.} tyto vlastnosti:
+			\begin{enumerate}
+				\item Elementárnost - algoritmus sestává z konečného počtu jednoduchých kroků.
+				\item Konečnost - algoritmus doběhne v konečném množství kroků.
+				\item Korektnost - algoritmus produkuje pro každý správný vstup korektní výsledek.
+				\item Obecnost - algoritmus řeší všechny instance daného problému. \footnote{Instance problému je jeden konkrétní vstup pro tento problém.}
+				\item Determinovanost - každý krok vykonávání algoritmu je jednoznačně určený.
+				
+				
+			\end{enumerate} 
+			
+			
+			\section{Ukázky jednoduchých algoritmů}
+			Nejstarší dochované algoritmy se datují již do Sumerské říše, odkud pochází hliněná tabulka s prvním dochovaným algoritmem na dělení, její odhadované stáří činí 4500 let. V antickém Řecku vznikaly první algoritmy pro aritmetiku, jako například Euklidův algoritmus, či Eratosthenovo síto. \cite{history}
+				
+				
+				\subsection{Eratosthenovo síto}
+				Tento algoritmus pro hledání prvočísel popsal poprvé řek Nikómachos z Gerasy, připisuje ho Eratosthenovy z Kyrény. Jeho algoritmus vygeneruje všechna prvočísla menší než nějaké číslo \emph{n} podle jednoduché procedury. \cite{history} Toto číslo \emph{n}, podle kterého se odvíjí průběh algoritmu, označujeme jako vstup algoritmu. \\ Samotné kroky algoritmu pak jsou:
+				\begin{enumerate}
+				\item Vytvoř posloupnost čísel od 2 do $n$.
+				\item Vyber nejmenší dosud nevybrané číslo poslopnosti, nechť je prvočíslo.
+				\item Odstraň všechny násobky právě vybráného prvočísla.
+				\item Vrať se na krok 2, pokud si naposledy nevybral číslo větší než $\sqrt{n}$.							
+				\item Na konci zůstanou v posloupnosti pouze prvočísla.
+				
+				\end{enumerate}
+				Tento algoritmus jsme právě popsali v prostém jazyce. Jak je vidět, je pochopitelný pro člověka a bezchybným provedením všech kroků dojde ke korektnímu výsledku. Mohli bychom ho stejně tak vyjádřit v \emph{pseudokódu}, což je speciální druh jazyka, který připomíná běžné programovací jazyky. Pseudokód se však výhýbá implementačním detailům a konkrétním standartům opravdových jazyků, zároveň je však tak přesný, aby šel s trochou snahy jednoduše převést do vhodného programovacího jazyka a hlavně vyjádřil myšlenku. \cite{pruvodce}
+				\subsection{Euklidův algoritmus}
+				Euklidův algoritmus je dodnes používaný algoritmus pro nalezení největšího společného dělitele dvou přirozených čísel \cite{pruvodce}. 
+				Jeho vyjádření v pseudokódu vypadá následovně:
+				
+				\begin{algorithm}
+			    \caption{Euklides \cite{pruvodce}}
+  				\Vst{$x,y \in \mathbb{N} $}
+				$a\gets x, b\gets y$\;  				
+  				\While{můžeš}{
+    			\If{$a < b$}{prohoď $a$ s $b$}
+  				\If{$b = 0$}{vyskoč z cyklu}
+  				$a \gets a \text{ mod } b$ \Komentar*{mod značí zbytek po vydělení $a$ hodnotou $b$}
+  				}
+				\Vyst{ Největší společný dělitel $a$ = gcd($x,y$)}
+				\end{algorithm}
+				
+				V hlavičce je algoritmus pojmenovaný a očíslovaný v rámci celého dokumentu. Výraz $a \gets x$ vyjadřuje vytvoření nové proměnné $a$ (pokud do té doby neexistovala) a uložení hodnoty proměnné $x$ do $a$. Svislé čáry značí bloky kódu, v bloku kódu se nejčastěji vyskytuje vnitřní logika cyklu, podmínky nebo funkce. Dále cokoliv za značkou $\lhd$ je komentář, čili text pouze pro vysvětlení samotného kódu.				
 				
 
-		\chapter{Vsuvka z teorie grafů}
+				Existují i jiné způsoby zápisu algoritmů jako např. grafický zápis flowchartem neboli vývojovým diagramem, či pomocí struktogramu \cite{zaklady}. V této práci budeme nadále používat pro popis složitějších algoritmů pouze pseudokód, pro jeho jednoduchost a zárověň přesnost.
+				
+					
+			
 		
 		\chapter{Analýza algoritmů}
-			\section{Časová složitost}
+		Pro jeden problém obvykle existuje více algoritmů, které ho řeší. Abychom mohli porovnávat různé algoritmy mezi sebou, potřebujeme  zavést nějaké metriky či veličiny, které nám budou popisovat jejich vlastnoti. 
+		
+		Pro nás nejdůležitějšími vlastnostmi algoritmu jsou jeho doba běhu a množství paměti potřebné pro jeho běh. Důvodem je, že samotná konečnost algoritmu není zárukou toho, že se po jeho spuštění dočkáme výsledku. Může se totiž stát, že instrukcí bude tak moc, že bychom se jejich zpracování a tudíž výsledku nemuseli vůbec dočkat.
+		
+		Obdobně na dnešních počítačích nemáme neomezené množství výpočetní paměti, přestože trendem v této oblasti je neustálý růst, stejně jako u rychlosti výpočetních jednotek\footnote{Fenomén, že se přibližně každé dva roky zdojnásobí výkon nových počítačů, se někdy nazývá \emph{Moorův zákon}.}. Proto musíme algoritmy optimalizovat i z tohoto hlediska. \cite{cerny}
+		
+		
+			\section{Časová a  prostorová složitost}
 			
-			\section{Prostorová složitost}			
+			Časovou složitost algoritmu definujeme jako funkci $f$ přiřazující každé velikosti vstupu počet elementárních instrukcí nutných pro vykonání algoritmu se vstupem této velikosti. Elementárními instrukcemi pak rozumíme aritmetické operace, porovnání apod. jednoduše to, co zvládne běžný procesor jednou nebo pár instrukcemi. 
+			Dále prohlásíme, že každá jedna instrukce trvá vždy konstantně času. Vstupů jedné velikosti bude obvykle více, proto vždy vybereme ten, který vyžaduje nejvíc instrukcí. Tím pádem bude funkce dávat počty instrukcí v nejhorším případě.
+			
+			
+			Prakticky to znamená, že si můžeme napsat algoritmus v pseudokódu a spočítat kolikrát se vykoná každá instrukce pro různě velké vstupy. Obvykle bude tato funkce rostoucí a nás nejvíce zajímá, jak rychle roste vzhledem k růstu velikosti vstupu. To znamená, že nás zajímá limitní chování funkce složitosti. Proto se zavádí takzvaná \emph{asymptotická notace}.
+			
+			Prostorová složitost je zavedena obdobně, s rozdílem, že místo počtu instrukcí určuje, kolik výpočetní paměti algoritmus potřebuje pro svůj běh v závisloti na velikosti vstupu. \cite{pruvodce}
+			\section{Asymptotická notace}
+			Asymptotická notace je způsob, jak vyjádřit řád růstu funkce. Jejím úkolem je zjednodušit funkci složitosti algortimu s ohledem na to, že s dostatečně velkými vstupy bude rychlost růstu funkce určovat jen nejvýznamnější, tj. nejrychleji roustoucí člen. Toho docílí eliminací všech méně významných členů včetně konstant. Rozlišují se tři notace: $\mathcal{O}$-notace, $\Omega$-notace, $\Theta$-notace. \cite{intro}
+			
+			\subsection{$\mathcal{O}$-notace}
+			
+			$\mathcal{O}$-notace udává asymptotické omezení shora. Určuje, že funkce roste maximálně stejně rychle jako určitá míra.
+			
+			Formálně definujeme, že funkce $f(n)$ náleží do třídy složitosti $\mathcal{O}(g(n))$, pokud existuje konstanta $c > 0$ a $n_0$ takové, že pro každé $n>n_0$ platí $f(n) \leq c \cdot g(n)$.
+			
+			Situaci, kdy $f(n)$ náleží do $\mathcal{O}(g(n))$ značíme $f(n) = \mathcal{O}(g(n))$.
+			
+			Pokud by např. funkce $2n^2+100n+3000$ charakterizovala časovou složitost nějakého algortimu, zapíšeme skutečnost, že její řád růstu je $n^2$ následovně: $2n^2+100n+3000 = \mathcal{O}(n^2)$. Tvrdíme, že časová složitost takového algortimu je $\mathcal{O}(n^2)$. Je vidět, že $\mathcal{O}$ "seškrtne" všechny méně významné členy, rovnež jako konstanty\footnote{V praxi se může velká konstanta promítnout do doby běhu programu, proto se někdy zohledňuje, obvzlášť vybíráme-li mezi dvěma algortimy se stejnými asymptotickými složitostmi.} násobící všechny členy. Takto zavedená notace zjednodušuje porovnávání různých algoritmů mezi sebou.
+			
+			$\mathcal{O}$-notace udává dobu běhu programu v nejhorším případě, tj. na asymptoticky nejsložitějším vstupu. Je možné, že existují i vstupy, pro které má algortimus lepší asymptotickou časovou složitost než $\mathcal{O}(g(n))$, ktéré vyšlo pro nejhorší případ. Přesto, jelikož $\mathcal{O}$ omezuje ze shora, nebude tvrzení, že algoritmus má v každém případě složitost $\mathcal{O}(g(n))$ chybné. Uvažme, že funkce $h=n^2$ je nejen $\mathcal{O}(n^2)$, ale i $\mathcal{O}(n^3)$, obecně je $\mathcal{O}(n^c)$, pro $c \geq 2$.
+			
+			$\Omega$-notace a $\Theta$-notace jsou zavedeny obdobně. $\Omega$-notace udává asymptotické omezení zdola, tj. určuje funkce asypmtoticky roustoucí alespoň stejně rychle jako nějaká daná míra.
+			
+			$\Theta$-notace udává nejtěsnější mez, a to oboustrannou, tj. říká, že funkce roste stejně rychle jako daná míra. Pokud platí 
+$f(n) = \mathcal{O}(g(n))$ a $f(n) = \Omega(g(n))$, pak platí $f(n) = \Theta(g(n))$.
+
+			$\Omega$ značení pak používáme pro charakterizaci složitosti nejlepšího případu, $\Theta(g)$ se používá pro průměrný případ.
+			Formální definice jsou uvedeny v \cite{intro}.
+
+			
+
+		\chapter{Vsuvka z teorie grafů}
+		Tohle zatím přeskočím, možná tohle ani nebude muset být samotná kapitola, ale jen podkapitola v další kapitole.
 				
-		\chapter{Algoritmy}
+				
+		\chapter{Algoritmy pro hledání cest}
+		V této kapitole budou podrobně popsány a analyzovány některé algoritmy z oblasti pathfinding(heldání cest). Ty budou pak hlavím předmětem mého vizualizačního programu.
+			 
 			\section{Prohledávání do hloubky}
 			
 			\section{Prohledávání do šířky}
@@ -62,10 +165,22 @@
 			
 			\section{Algoritmus A*}
 			
+			
+			
+			
 	
 	\part{Implementace vizualizačního programu}
-
-		\section{Výpisy použitých programů}
+	
+		
+		
+		\chapter{Plánování}
+			\section{Představení použitého software}
+		
+		\chapter{Implementace}
+		
+		\chapter{Ukázky využití}
+		
+		\chapter{Výpisy použitých programů}
 
 
 

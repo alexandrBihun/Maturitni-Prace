@@ -29,7 +29,9 @@
 	}	
 	
 	\abstrakt{
-		Tato maturitní práce se zaměřuje na vysvětlení chodu známých algoritmů v oblasti pathfindingu (vyhledávání cest), rovněž jako na jejich analýzu a přiblížení jejich využití v opravdovém světě. Dále bude naznačeno, jak jsem implementoval za pomoci knihovny Pygame v jazyce Python uživatelsky přívětivou aplikaci pro vizualizaci těchto algoritmů, která umožňuje uživatelům hlubší porozumění a poskytuje skutečný vhled na funkci těchto algoritmů.% Abstrakt
+		Tato maturitní práce se zaměřuje na vysvětlení chodu známých algoritmů v oblasti pathfindingu (vyhledávání cest), rovněž jako na jejich analýzu a přiblížení jejich využití v opravdovém světě. Dále bude naznačeno, jak jsem implementoval za pomoci knihovny Pygame v jazyce Python %uživatelsky přívětivou 
+		aplikaci vizualizující principy jednotlivých algoritmů.
+		%aplikaci pro vizualizaci těchto algoritmů, která interaktivní formou vykresluje principy jednotlivých algoritmů.%uživatelům hlubší porozumění a poskytuje skutečný vhled na funkci těchto algoritmů.% Abstrakt
 	}{
 		algoritmy, analýza algoritmů, vyhledávání cest, grafy,  vizualizace, python, pygame					% Klíčová slova
 	}
@@ -41,7 +43,7 @@
    {\tableofcontents\newpage}			% Obsah
 	
 %\addtocounter{page}{1}		% Posunutí countru stránek	
-\pagenumbering{arabic}		% Číslování stránke arabskými číslicemi
+%\pagenumbering{arabic}		% Číslování stránke arabskými číslicemi
 	\chapter*{Úvod}
 	Přesto, že si to většina lidí nejspíše neuvědomuje, využívají algoritmy na denním pořádku. 
 	V této maturitní práci se proto pokusím nejprve objasnit co se za tímto pojmem vůbec skrývá a jak o algoritmech přemýšlet, rovněž nastíním některé teoretické základy tohoto odvětví počítačové vědy.
@@ -51,7 +53,7 @@
 	 
 	 %Velmi často se také používají pro řešení nejrůznějších úloh kompetitivního programování, kterého se já sám už řadu let účastním.
 	 	
-Hlavním cílem této práce je navrhnout a úspěšně vyvinout program, který bude schopen tyto vybrané algoritmy efektivně vizualizovat. Bude kladen důraz na to, aby byl program jednoduchý a uživatelsky přívětivý, zároveň však poskytoval všechny potřebné funkce. Smyslem této vizualizace bude pomoci uživateli těmto algoritmům lépe porozumět a "osahat" si je a jejich chování, což očekávám že povede k hlubšímu pochopení těchto algoritmů. Přidaným benefitem vizualizace je bezpochyby její hravá forma s interaktivita
+Hlavním cílem této práce je navrhnout a úspěšně vyvinout program, který bude schopen tyto vybrané algoritmy efektivně vizualizovat. Bude kladen důraz na to, aby byl program jednoduchý a uživatelsky přívětivý, zároveň však poskytoval všechny potřebné funkce. Smyslem této vizualizace bude pomoci uživateli těmto algoritmům lépe porozumět a \uv{osahat} si je a jejich chování, což očekávám že povede k hlubšímu pochopení těchto algoritmů. Přidaným benefitem vizualizace je bezpochyby její hravá forma s interaktivita
 %, od které si slibuji záživné a poutavé zkoumání těchto algoritmů 
 v kontrastu s běžným teoretickým přístupem k výkladu algoritmů.
 
@@ -63,7 +65,7 @@ v kontrastu s běžným teoretickým přístupem k výkladu algoritmů.
 		Samotné slovo algoritmus vzniklo zkomolením jména významného perského matematika Abu Jafara Muhammada ibn Mūsā al-Chwārizmiho, který v první polovině devátého století ve svých
 dílech položil základy algebry a způsobů řešení lineárních a kvadratických rovnic. Po vzniku latinského překladu
 jeho spisu o indickém početním systému, ve kterém ukazuje, jak provádět základní početní
-operace, nabylo jeho jméno nového významu. Do latiny byl totiž přeložen pod titulem \emph{Algoritmi de Numero Indorum} (česky ”Algoritmi o číslech od Indů”), kde slovo Algortimi je latinizovaná
+operace, nabylo jeho jméno nového významu. Do latiny byl totiž přeložen pod titulem \emph{Algoritmi de Numero Indorum} (česky \uv{Algoritmi o číslech od Indů}), kde slovo Algortimi je latinizovaná
 forma jeho jména. Toto slovo se pak začalo používat jako označení různých
 matematických postupů. \cite{cerny} \cite{neckar} \cite{mehri}
 			
@@ -145,7 +147,7 @@ matematických postupů. \cite{cerny} \cite{neckar} \cite{mehri}
 			
 			Prostorová složitost je zavedena obdobně, s rozdílem, že místo počtu instrukcí určuje, kolik výpočetní paměti algoritmus potřebuje pro svůj běh v závislosti na velikosti vstupu. \cite{pruvodce}
 			\section{Asymptotická notace}
-			Asymptotická notace je způsob, jak vyjádřit řád růstu funkce. Jejím úkolem je zjednodušit funkci složitosti algoritmu s ohledem na to, že s dostatečně velkými vstupy bude rychlost růstu funkce určovat jen nejvýznamnější, tj. nejrychleji rostoucí člen. Toho docílí eliminací všech méně významných členů včetně konstant. Rozlišují se tři notace: $\mathcal{O}$-notace, $\Omega$-notace, $\Theta$-notace. \cite{intro}
+			Asymptotická notace je způsob, jak vyjádřit řád růstu funkce. Jejím úkolem je zjednodušit funkci složitosti algoritmu s ohledem na to, že s dostatečně velkými vstupy bude rychlost růstu funkce určovat jen nejvýznamnější, tj. nejrychleji rostoucí člen. Toho docílí eliminací všech méně významných členů včetně konstant. Rozlišují se tři notace: $\mathcal{O}$-notace, $\Omega$-notace, $\Theta$-notace. V této sekci bylo čerpáno z \cite{intro}.
 			
 			\subsection{$\mathcal{O}$-notace}
 			
@@ -155,9 +157,9 @@ matematických postupů. \cite{cerny} \cite{neckar} \cite{mehri}
 			
 			Situaci, kdy $f(n)$ náleží do $\mathcal{O}(g(n))$ značíme $f(n) = \mathcal{O}(g(n))$.
 			
-			Pokud by např. funkce $2n^2+100n+3000$ charakterizovala časovou složitost nějakého algoritmu, zapíšeme skutečnost, že její řád růstu je $n^2$ následovně: $2n^2+100n+3000 = \mathcal{O}(n^2)$. Tvrdíme, že časová složitost takového algoritmu je $\mathcal{O}(n^2)$. Je vidět, že $\mathcal{O}$ "seškrtne" všechny méně významné členy, rovněž jako konstanty\footnote{V praxi se může velká konstanta promítnout do doby běhu programu, proto se někdy zohledňuje, obzvlášť vybíráme-li mezi dvěma algoritmy se stejnými asymptotickými složitostmi.} násobící všechny členy. Takto zavedená notace zjednodušuje porovnávání různých algoritmů mezi sebou.
+			Pokud by např. funkce $2n^2+100n+3000$ charakterizovala časovou složitost nějakého algoritmu, zapíšeme skutečnost, že její řád růstu je $n^2$ následovně: $2n^2+100n+3000 = \mathcal{O}(n^2)$. Tvrdíme, že časová složitost takového algoritmu je $\mathcal{O}(n^2)$. Je vidět, že $\mathcal{O}$ \uv{seškrtne} všechny méně významné členy, rovněž jako konstanty\footnote{V praxi se může velká konstanta promítnout do doby běhu programu, proto se někdy zohledňuje, obzvlášť vybíráme-li mezi dvěma algoritmy se stejnými asymptotickými složitostmi.} násobící všechny členy. Takto zavedená notace zjednodušuje porovnávání různých algoritmů mezi sebou.
 			
-			$\mathcal{O}$-notace udává dobu běhu programu v nejhorším případě, tj. na asymptoticky nejsložitějším vstupu. Je možné, že existují i vstupy, pro které má algoritmus lepší asymptotickou časovou složitost než $\mathcal{O}(g(n))$, které vyšlo pro nejhorší případ. Přesto, jelikož $\mathcal{O}$ omezuje ze shora, nebude tvrzení, že algoritmus má v každém případě složitost $\mathcal{O}(g(n))$ chybné. Uvažme, že funkce $h=n^2$ je nejen $\mathcal{O}(n^2)$, ale i $\mathcal{O}(n^3)$, obecně je $\mathcal{O}(n^c)$, pro $c \geq 2$.
+			$\mathcal{O}$-notace udává dobu běhu programu v nejhorším případě, tj. na asymptoticky nejsložitějším vstupu. Je možné, že existují i vstupy, pro které má algoritmus lepší asymptotickou časovou složitost než $\mathcal{O}(g(n))$, které vyšlo pro nejhorší případ. Přesto, jelikož $\mathcal{O}$ omezuje ze shora, nebude tvrzení, že algoritmus má v každém případě složitost $\mathcal{O}(g(n))$ chybné. Uvažme, že funkce $h(n)=n^2$ je nejen $\mathcal{O}(n^2)$, ale i $\mathcal{O}(n^3)$, obecně je $\mathcal{O}(n^c)$, pro $c \geq 2$.
 			
 			$\Omega$-notace a $\Theta$-notace jsou zavedeny obdobně. $\Omega$-notace udává asymptotické omezení zdola, tj. určuje funkce asymptoticky rostoucí alespoň stejně rychle jako nějaká daná míra.
 			
@@ -191,7 +193,7 @@ $f(n) = \mathcal{O}(g(n))$ a $f(n) = \Omega(g(n))$, pak platí $f(n) = \Theta(g(
 			Běžný počítač provede okolo $10^9$ operací za vteřinu. Tabulka \ref{tabulka} ukazuje některé časté složitostní funkce\footnote{Pro funkce složitosti s logaritmem obvykle myslíme logaritmus se základem dva. Ten se v počítačové vědě objevuje tak často, že se u něj dvojka ani nezapisuje.} a odhad, jak dlouho by algoritmus s uvedenou složitostí běžel na běžném počítači pro různě velké vstupy. %pro různě velké vstupy. 
 			\cite{cerny}
 			
-			Z tabulky \ref{tabulka} je vidět, že polynomiální nebo logaritmické složitosti nabízí "rozumný" čas běhu vůči velikosti vstupu. Naopak algoritmy s \emph{nepolynomiální} složitostí jsou prakticky nepoužitelné. %Z toho vychází slavný problém $P$ versus $NP$, kde  
+			Z tabulky \ref{tabulka} je vidět, že polynomiální nebo logaritmické složitosti nabízí \uv{rozumný} čas běhu vůči velikosti vstupu. Naopak algoritmy s exponenciální nebo horší složitostí jsou prakticky nepoužitelné. %\emph{nepolynomiální} %Z toho vychází slavný problém $P$ versus $NP$, kde  
 			
 				
 		\chapter{Algoritmy pro hledání cest}
@@ -268,10 +270,10 @@ $f(n) = \mathcal{O}(g(n))$ a $f(n) = \Omega(g(n))$, pak platí $f(n) = \Theta(g(
     		\caption{}
   			\end{subfigure}
   \caption{Příklady grafů. (a) Neorientovaný graf. (b) Orientovaný graf.}
-  \label{des}
+  \label{obrazky_grafu}
   \end{figure}
   
-			Příklady nakreslení grafu vidíme na obrázku \ref{des}.
+			Příklady nakreslení grafu vidíme na obrázku \ref{obrazky_grafu}.
 			Pomocí neorientovaného neohodnoceného grafů můžeme například reprezentovat vztahy mezi lidmi, kde vrcholy budou jednotlivé osoby a hrany povedou mezi těmi dvojicemi vrcholů, které spolu kamarádí. Nebo můžeme pomocí ohodnoceného grafu modelovat síť měst, kde hodnota hran mezi dvěma městy bude značit délku silnice mezi městy. Často se také grafy využívají pro popis \emph{stavového prostoru} her, kde vrcholy představují stavy a hrany mezi nimi akce, kterými lze přejít z jednoho stavu do druhého.
 			
 			
@@ -358,7 +360,7 @@ DFS se zásobníkem je popsáno pseudokódem \ref{dfs}.
 			 %	DFS lze využít například pro hledání \emph{komponent souvisloti} grafu.
 			
 			
-			Časová komplexita je $\mathcal{O}(|V| + |E|)$, protože v nejhorším případě projde celý graf. Prostorová složitost je $\Theta(|V| + |E|)$. TODO(zkontrolovat)
+			Časová komplexita je $\mathcal{O}(|V| + |E|)$, protože v nejhorším případě projde celý graf. Prostorová složitost je $\Theta(|V| + |E|)$.
 			
 			\section{Prohledávání do šířky}
 			Algoritmus prohledávání do šířky (anglicky \emph{breadth-first search}, zkráceně \emph{BFS}) je dalším algoritmem pro procházení grafu. BFS prochazí graf do \emph{šířky}, tj. postupně prozkoumává všechny sousedy počátečního vrcholu $v_0$, pak sousedy sousedy sousedů  atd. %dříve, než se pohne dál do hloubky.
@@ -366,7 +368,7 @@ DFS se zásobníkem je popsáno pseudokódem \ref{dfs}.
 %Podobně jako u DFS začínáme v počátečním vrcholu $v_0$.
 Na rozdíl od DFS používá BFS frontu namísto zásobníku. Fronta je datová struktura, která pracuje podle pravidla FIFO (First In, First Out), což znamená, že prvek, který je v frontě nejdéle, bude odebrán jako první. Operaci přidání prvku na konec fronty se obvykle říká ENQUEUE a odebrání prvku ze začátku fronty DEQUEUE.
 
-Algoritmu se někdy přezdívá "algoritmus vlny", protože nalezne nejdřív všechny vrcholy vzdálené od $v_0$ o jedna (sousedy $v_0$), pak ty vzdálené o dva (sousedy sousedů $v_0$) a tak dále, jako by se z $v_0$ šířila vlna po vodní hladině.
+Algoritmu se někdy přezdívá \uv{algoritmus vlny}, protože nalezne nejdřív všechny vrcholy vzdálené od $v_0$ o jedna (sousedy $v_0$), pak ty vzdálené o dva (sousedy sousedů $v_0$) a tak dále, jako by se z $v_0$ šířila vlna po vodní hladině.
 
 Detailní popis nalezneme v pseudokódu \ref{bfs}.
 
@@ -422,7 +424,7 @@ Detailní popis nalezneme v pseudokódu \ref{bfs}.
 \caption{Graf s vrcholy označenými podle pořadí, v jakém je projde BFS} \label{grafBFS}
 \end{center}
 \end{figure}
-Časová složitost BFS je $\mathcal{O}(|V| + |E|)$, což znamená, že v nejhorším případě projde celý graf. Prostorová složitost je $\mathcal{O}(|V| + |E|)$.
+Časová složitost BFS je $\mathcal{O}(|V| + |E|)$, což znamená, že v nejhorším případě projde celý graf. Prostorová složitost je $\Theta(|V| + |E|)$.
 
 Výhodou BFS je to, že při hledání cesty vždy najde nejkratší\footnote{Takovou, která obsahuje nejméně vrcholů.} cestu mezi dvěma vrcholy, případně pozná, že mezi nimi neexistuje cesta. Protože nijak nezapočítává ohodnocení hran, bude i v ohodnocených grafech nacházet cestu s nejméně vrcholy. V takových grafech ale jako nejkratší cestu obvykle považujeme tu, která má nejmenší součet ohodnocení všech hran. Z tohoto důvodu nenalezne BFS optimální cestu na ohodnocených grafech.
 
@@ -454,7 +456,7 @@ Výhodou BFS je to, že při hledání cesty vždy najde nejkratší\footnote{Ta
 			\subsection{Uniform Cost Search}
 			Uniform cost search, dále jen UCS, je algoritmus třídy uspořádaného vyhledávání, který najde optimální %nejlevnější\footnote{Jako nejlevnější cestu označujeme cestu s nejnižším součtem vah všech hran cesty.} 
 			cestu mezi počátečním vrcholem $v_0$ a cílovým vrcholem $c$ v grafu s kladně ohodnocenými hranami. 
-			UCS funguje podobně jako BFS, jen místo postupného prohledávání vrcholů ve stejné hloubce (se stejným minimálním počtem hran od startu) prohledává UCS ve "vrstvách" stejné ceny.
+			UCS funguje podobně jako BFS, jen místo postupného prohledávání vrcholů ve stejné hloubce (se stejným minimálním počtem hran od startu) prohledává UCS ve \uv{vrstvách} stejné ceny.
 			
 			%UCS funguje velmi podobně jako BFS, jen se místo hladin vrcholů stejně vzdálených od $s$ uvažuje vrcholy se stejným $g(v)$.
 			Evaluační funkcí pro UCS je $f(v) = g(v)$, kde $g(v)$ je cena cesty mezi počátečním vrcholem $s$ a vrcholem $v$. 
@@ -558,15 +560,20 @@ Heuristická funkce $h(n)$ je \emph{přípustná}, pokud pro každý vrchol $v \
 			Algoritmus A* navrhli Peter Hart, Nils Nilsson a Bertram Raphael v roce 1968. % pro jejich robota. 
 			Algoritmus A* kombinuje efektivitu hladového uspořádaného vyhledávání s optimalitou algoritmu UCS.
 			
-			Tento algoritmus jako svou ohodnocovací funkci $f(v)$ využívá součet heuristické funkce $h(v)$ a funkce $g(v)$, která udává délku nejkratší cesty z počátečního vrcholu do vrcholu $v$: $f(v) = g(v) + h(v)$. 
 			
-			Protože je to další algoritmus z třídy uspořádaného vyhledávání, funguje podobně jako UCS i hladové uspořádané vyhledávání.
-			 A* taktéž prochází vrcholy grafu podle hodnoty ohodnocovací funkce a vybírá vrcholy s nejnižší hodnotou $f(v)$, jediným rozdílem je ohodnocovací funkce samotná.
+			Protože se jedná o další algoritmus z třídy uspořádaného vyhledávání, funguje podobně jako UCS i hladové uspořádané vyhledávání. A* taktéž prochází vrcholy grafu podle hodnoty ohodnocovací funkce a vybírá vrcholy s nejnižší hodnotou $f(v)$, jediným rozdílem je ohodnocovací funkce samotná.
+			Tento algoritmus jako svou ohodnocovací funkci $f(v)$ využívá součet heuristické funkce $h(v)$ a funkce $g(v)$, která udává délku nejkratší cesty z počátečního vrcholu do vrcholu $v$: $f(v) = g(v) + h(v)$. Heuristika zde figuruje jako informace navíc, kterou čistě z grafu nevyčteme, proto se i A* řadí mezi informované algoritmy.  
+			
+			 
 			%Navíc pokud nalezne pro nějaký vrchol kratší cestu z počátku, updatuje jí. 
-			Pokud bude $h(v)$ přípustná, pak A* vždy najde optimální cestu do cílového vrcholu, 
+			
+			%Heuristika se přitom volí podle konkrétního problému – např. hledáme-li cestu v mapě, můžeme použít vzdálenost do cíle vzdušnou čarou.
+			Pokud bude $h(v)$ přípustná, pak A* vždy najde optimální cestu do cílového vrcholu.		
+			 Zvolit přípustnou heuristiku bývá jednoduché, stačí aby nikdy nepřecenila skutečnou cenu cesty do cíle. Například pro hledání cesty v mapě můžeme použít vzdálenost do cíle vzdušnou čarou, neboli eukleidovskou vzdálenost. Ovšem čím menší $h(v)$ bude tím více vrcholů A* prozkoumá. 
+			
+			Pokud bychom zvolili takovou heuristiku, že $\forall v \in V:h(v) = 0$ tak A* degraduje do UCS, naopak pokud $\forall v \in V:g(v) = 0 $ tak A* degraduje do hladového uspořádaného vyhledávání řízeného pouze heuristikou.
 			
 			
-			Pokud máme takovou heuristiku, že $\forall v \in V:h(v) = 0$ tak A* degraduje do UCS, naopak pokud $\forall v \in V:g(v) = 0 $ tak A* degraduje do hladového uspořádaného vyhledávání.
 			
 			A* je velmi populární volbou pro implementaci pathfindingu ve hrách nebo v mapových aplikacích pro jeho optimalitu a zároveň efektivitu a rychlost výpočtu. Existují i optimalizované verze A*, které například omezují paměťové nároky.
 			
@@ -574,24 +581,156 @@ Heuristická funkce $h(n)$ je \emph{přípustná}, pokud pro každý vrchol $v \
 			
 	
 	\part{Implementace vizualizačního programu}
-	
 		
-		
+		\chapter{Záměr práce}
+			Cílem druhé části této práce je vytvoření vizualizačního programu, který bude sloužit k názornému ilustrování chodu algoritmů popsaných v předchozí části. Při tvorbě programu bude kladen důraz na lehce osvojitelné ovládání, které umožní komukoliv používat program bez nutnosti školení.
+			
+			Vizualizační program bude navržen tak, aby uživatelům umožnil pohodlně a jednoduše upravovat veškeré vstupní parametry vizualizace. Taková míra interaktivity dovolí uživateli zkoumat chování algoritmů na různých grafech a objevovat jejich silné a slabé stránky.
+			 Primárním záměrem programu je pak pomoci studentům nebo případným zájemcům o problematiku pathfindingu do hloubky porozumět principům za jednotlivými algoritmy pro hledání cest.
+			 %Tato část se zabývá představením použitých technologií, popisem aplikace a jejích funkcí a příručky jak ji používat.
+			 
+			 %Mým cílem je i dovolit hodně velké grafy protože je to cool.
+
 		\chapter{Plánování}
-			\section{Představení použitého software}
-		
-		\chapter{Implementace}
-		
-		\chapter{Ukázky využití}
-		
-		\chapter{Výpisy použitých programů}
+			Vizualizace je proces vytváření obrazu něčeho, co není zrovna vidět nebo nějakého abstraktního konceptu. Algoritmy jsou abstraktní koncepty z definice. Co víc, i když si algoritmus úspěšně naprogramujeme, typicky nevidíme a ani nesledujeme každý jeho krok, zajímá nás jen výsledek. To je pochopitelné pokud algoritmu rozumíme a používáme ho k řešení konkrétního problému. Naopak hlavním smyslem vizualizace algoritmu je názorně ilustrovat chod algoritmu, zejména pro výukové účely.
+			%Vizualizace tedy slouˇz´ı k lepˇs´ımu pochopen´ı probl´emu, kter´y modeluje
+			
+			Než jsem se pustil do samotného programování vizualizační aplikace, musel jsem si nejprve promyslet, jak si vůbec vizualizační program představuji. 
+			Jelikož je účelem programu vizualizovat grafové algoritmy, bylo jedním z nejdůležitějších rozhodnutí, jakým způsobem graficky reprezentovat graf. Nabízela se možnost grafy reprezentovat podobně jako na obrázku \ref{obrazky_grafu}. Avšak takový přístup by značně omezil a ztížil uživateli návrh vlastních grafů, protože by musel každý jeden vrchol manuálně vytvořit a zdlouhavě spojovat vybrané vrcholy hranami. Domnívám se, že pro větší počet vrcholů už by se vizualizace značně znepřehlednila. Já od vizualizace požaduji i možnost zobrazovat \uv{velké} grafy, protože na grafu s malým počtem vrcholů by vizualizace nemusely být dostatečně názorné.
+			
+			Proto jsem se rozhodl reprezentovat graf pomocí mřížkové sítě. Na mřížkovou síť lze nahlížet jako speciální druh grafu, kde každé políčko sítě bude reprezentovat vrchol a mezi sousedními políčky povedou pomyslné hrany. Takový graf sám o sobě by byl velmi jednotvárný a nezajímavý, proto do sítě půjde umísťovat neprůchodné stěny, které graf zredukují o některé prvky. 
+			
+			Jednou možností, jak realizovat stěny, je nechat všechna políčka průchozí a umisťovat stěny mezi některé sousední políčka, což bude v grafu ekvivalentní s smazáním hran mezi odpovídajícími vrcholy. Druhou možností je určit některá políčka jako stěny a odpovídající vrcholy z grafu smazat, stejně jako všechny hrany, jichž jsou součástí. 
+			
+			Zvolil jsem druhou možnost, protože takovou mřížku půjde jednoduše upravovat. Ukázka takové mřížky je na obrázku \ref{mrizka_ukazka}. Uživatel si bude moct vybrat nástroj štětce a tím označit políčka, která mají figurovat jako stěny. Další nutné nástroje zahrnují nástroj pro umisťování a přemísťování startovních a cílových vrcholů. 
+			
+			\begin{figure}
+  			\centering
+  			\begin{subfigure}[b]{0.45\textwidth}
+  			\centering 
+  			\includegraphics{mrizka2.png}
+  			\caption{}
+  			\end{subfigure}
+  			\hfill
+  			\begin{subfigure}[b]{0.45\textwidth}
+    		\centering
+    		\begin{tikzpicture}[node distance={8mm},shorten >=1,->]
+  \tikzstyle{vertex}=[circle, draw, inner sep=2mm]
+  \node[vertex] (1) at (0,2) {};
+  \node[vertex] (2) [left of=1]  {};
+  \node[vertex] (3) [left of=2]  {};
+  \node[vertex] (4) [left of=3]  {};
+  \node[vertex] (5) [left of=4]  {};
+  \node[vertex] (6) [above of=5]  {};
+  \node[vertex] (7) [above of=3]  {};
+  \node[vertex] (8) [above of=1]  {};
+  
+  \node[vertex] (9) [above of=7]  {};
+  \node[vertex] (10) [above of=8]  {};
+  
+  \node[vertex] (11) [above of=9]  {};
+  \node[vertex] (12) [above of=10]  {};
+  
+  \node[vertex] (13) [left of=11]  {};
+  \node[vertex] (14) [left of=13]  {};
+  
+  \draw (1) -- (2) -- (3) -- (4) -- (5) -- cycle;
+  \draw (1) -- (8) -- (10) -- (12) -- cycle;
+  \draw (3) -- (7) -- (9) -- (11) -- (13) -- (14) -- cycle;
+  \draw (5) -- (6) -- cycle;
+ 
+    		\end{tikzpicture}
+    		\caption{}
+  			\end{subfigure}
+  \caption{(a) Mřížka v aplikaci, černá políčka jsou stěny. (b) Odpovídající graf.}
+  \label{mrizka_ukazka}
+  \end{figure}			
 
+		
+						
+			Poslední důležitou volbou bylo které všechny algoritmy bude program schopen vizualizovat. Můj výběr se skládá z algoritmů DFS, BFS, hladového uspořádaného vyhledávání a A*. Důvodem proč jsem vynechal UCS je, že na neohodnocených grafech prohledává velmi podobně jako BFS. Moje mřížková síť odpovídá neohodnocenému grafu, protože jako sousedy vrcholu bude považovat jen ty políčka sousedící ve vertikálním a horizonatálním směru. Cena přechodu z jednoho políčka do druhého tak bude vždy stejná.
+			
+			%protože manuální tvoření vlastního grafu po jednom vrcholu zní náročně.
+			%Cílem je předání dané informace co nejsrozumitelnější formou.
+			\section{Výběr prostředků pro vizualizaci}
+			Dalším krokem bylo zvolit si vhodné softwarové nástroje pro implementaci takového programu. Já se rozhodl pro programovací jazyk Python, protože umožňuje poměrně rychlý vývoj a  mám s ním největší zkušenosti.
+			
+			%však pro mé potřeby však nenabízí dostatečně dobré , proto 
+			Samotný Python jsem potřeboval doplnit nějakou knihovnou pro práci s GUI\footnote{Z anglického \emph{Graphical User Interface}.} - grafickým uživatelským rozhraním. Mou zvolenou knihovnou se stala knihovna pygame. Pygame je populární knihovna primárně určena pro vývoj her.  
+			%Umožňuje snadné vykreslování na obrazovku, zachycování vstupu a podobně. 
+			Pygame je postavena nad knihovnou Simple DirectMedia Layer (SDL), která obsluhuje nízkoúrovňové úlohy jako je renderování grafiky, zpracování zvuku a zachycování vstupu. Díky tomu se při vývoji s pygame můžeme zaměřit na implementaci logiky celé aplikace a nemusíme řešit tyto nízkoúrovňové záležitosti.
+			%očekával jsem že i moje aplikace s její pomocí půjde implementovat. 
+			Nesmírnou výhodou pygame je její jednoduchost v kombinaci s množstvím dostupných online tutoriálů, vysvětlujících jak základní principy, tak pokročilou práci s knihovnou.
+			\cite{pygame_intro} \cite{pygame_about}
+			 %neposlední řadě je skvělá pygame dokumentace \cite{pygame_dokumentace}. \cite{pygame_about} 			
+			
+		
+		\chapter{Vlastní vývoj}
+		V této kapitole představím hotový program formou vybraných útržků ze zdrojového kódu. Nebudu zde uvádět celý kód, protože je poměrně dlouhý. Celý zdrojový kód je volně dostupný na adrese \url{https://github.com/alexandrBihun/Maze-Visualizer}.
+			\section{Struktura programu}
+			Pro základní strukturu pygame aplikace mi byl inspirací \cite{yt_zelda}. Rozdělil jsem podobným způsobem program na jednotlivé moduly, které spolu komunikují. Každý modul obsahuje třídy a funkce zaměřené na jeden aspekt programu. Zjednodušený diagram interakce mezi moduly vidíme na \ref{app_diagram}
+			
+			\begin{figure}[h]
+  			\centering 
+  			\includegraphics[width = 400pt]{menu.png}
+  			\caption{Hlavní obrazovka}
+  			\label{menu}
+  			\end{figure}
+  			
+  			
+  			%\begin{figure}\includegraphics[width=šířka obrázku,jiná další nastavení]{soubor obrázku}\caption{Název}\label{jmenoodkazu}\end{figure}
+  			
+			USE-CASE DIAGRAM
+			
+			
+			APLIKAČNÍ DIAGRAM
+			nebo
+			DIAGRAM PROPOJENÝCH TŘÍD
+			
+			\section{Problémy}
+			
+			
+			
+		\chapter{Uživatelská příručka}
+		V této kapitole popíšu jak s mou aplikací pracovat a využít všechny její funkce. Rovněž zde uvedu některé vizualizace vytvořené mým programem.
+			\section{Ovládání}
+			Nejsnazší a také nejpohodlnější způsob, jak program ovládat je pomocí klávesnice:
+			\begin{itemize}
+			\item Tlačítky 1, 2, 3, 4 se mění vybraný algoritmus (DFS, BFS, Greedy Best First Search, A*).
+\item Mezerník spustí vizualizaci.
+\item 'g' vygeneruje bludiště.
+\item 's' vybere nástroj pro umisťování startu.
+\item 'f' vybere nástroj pro umisťování cíle.
+\item 'd' vybere nástroj pro kreslení a gumování stěn.
+\item 'c' smaže políčka vybarvená dokončenou vizualizací.
+\item 'r' restartuje celou aplikaci.
+\item Šipka nahoru zpomalí vizualizaci.
+\item Šipka dolů zrychlí vizualizaci.
 
-
+			Kromě tlačítek klávesnice lze některé funkce ovládat i tlačítky v postranním panelu aplikace. Konkrétně tlačítko v horní části cyklí přes algoritmy, tlačítko \uv{TOGGLE GRID} zapíná/vypíná vykreslování mřížky a tlačítko \uv{RUN} spouští vizualizaci. Tyto tlačítka jsem vytvořil aby bylo možné program na základní úrovni ovládat i bez znalosti kláves
+			
+			
+			Mimo to lze v souboru \texttt{settings.py} upravovat pokročilé možnosti. Proměnná \texttt{sideLength} udává počet políček ve straně mřížky. Výchozí hodnotou pro \texttt{sideLength} je 50, program správně vykresluje políčka až pro hodnoty \texttt{sideLength} $\leq 990$, což je výchozí počet pixelů ve straně mřížkového prostoru. Pro 990 tak jedno políčko zabírá jeden pixel obrazovky, nastavení vyšší hodnoty má za následek nevykreslení některých políček. Vizualizace stále bude fungovat, jen některé vrcholy grafu už nebudou vidět.
+			%Celkový počet políček je tak $\texttt{sideLength}^2$. 
+			\end{itemize}
+			\section{Barevné rozlišní políček}
+			V programu se 
+			\section{Ukázky použití}	
+			
+		
 
 	\chapter*{Závěr}
 	
 		Tady bude závěr.
+		
+		Co do budoucna: možnost ukládat a nahrávat nakreslená bludiště, přidat do vizualizace zvuk, rozšířit UI, menu Nápověda přímo v programu s informacemi o programu a algoritmech, 
+	
+	
+	\chapter{Výpisy použitých programů}
+
+
+
+
 	
 	\nocite{*}
     \printbibliography					% Vytvoří seznam literatury
